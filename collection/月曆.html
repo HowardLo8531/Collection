@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <style type="text/css">
+        table {
+            /*为表格设置合并边框模型*/
+            border-collapse: collapse;
+            /*列宽由表格宽度和列宽度设定*/
+            table-layout: fixed;
+        }
+
+        td {
+            word-wrap: break-word;
+            word-break: break-all;
+            border: 1px solid #ddd;
+            /*允许在单词内换行。*/
+            word-break: break-word;
+            /*设置宽度*/
+            height: 180px;
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+
+
+        <div class="row bg-light justify-content-center">
+            <a class="carousel-control-prev bg-primary" id="carouselId1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next bg-primary" id="carouselId2" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            <h1 id="demo" style="font-size:300%;text-align:center;">
+
+            </h1>
+        </div>
+
+        <div class="row bg-info ">
+
+            <div class="col">
+
+                <h4 style="text-align:center;">Su</h4>
+            </div>
+            <div class="col">
+
+                <h4 style="text-align:center;">Mo</h4>
+
+            </div>
+            <div class="col">
+
+                <h4 style="text-align:center;">Tu</h4>
+
+            </div>
+            <div class="col">
+
+
+                <h4 style="text-align:center;">We</h4>
+            </div>
+            <div class="col">
+
+                <h4 style="text-align:center;">Th</h4>
+            </div>
+            <div class="col">
+
+                <h4 style="text-align:center;">Fr</h4>
+            </div>
+            <div class="col">
+
+                <h4 style="text-align:center;">Sa</h4>
+            </div>
+
+
+
+        </div>
+        <div class="row ">
+
+            <table class="table table-bordered ">
+                <div class="rowtable">
+
+                </div>
+
+            </table>
+
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+
+                            <label for=""></label>
+                            <input type="text" class="form-control" name="" id="textbox" aria-describedby="helpId" placeholder="">
+
+
+                            <div class="btn-group ">
+
+                                <select class="form-control form-control-lg " id="colorchoose">
+                                    <option>Red</option>
+                                    <option>Blue</option>
+                                    <option>Yellow</option>
+                                    <option>Green</option>
+                                </select>
+
+                            </div>
+
+                            <input type="text" class="form-control" name="" value="300新竹市香山區五福路二段707號" id="textboxgg" aria-describedby="helpId" placeholder="">
+                            <button class "btn btn-primary" id="buttoncheckgg">找尋</button>
+
+                            <div id="map" style="width:450px; height:450px "></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="save" class="btn btn-primary">Save</button>
+                        <button type="button" id="delete" class="btn btn-primary">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6EH3jueR1kURn1OK7t5tRHnhN2JsOrjw&callback=initMap"
+        type="text/javascript"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+    <script>
+        var monthDays;
+        var month
+        var year
+        var table;
+        var row;
+        var cell;
+        var monthnum;
+        var x;
+        var date;
+        var rowtable;
+        var btn;
+        var scheduleItem;
+
+        var map;
+        var marker = null;
+        var center = { lat: 24.7571075, lng: 120.952429 };
+        var point1 = null;
+        var directionsService = null;
+        var directionsDisplay = null;
+        var request = new XMLHttpRequest();
+        var geocoder;
+        window.onload = function () {
+            var god = window.localStorage["name"];
+                console.log("b"+god);
+                var god2 = JSON.parse(god);
+                console.log("a"+god2.td);
+                document.getElementById(god2.td).innerHTML = god2.god3;
+                
+
+           
+           map = new google.maps.Map(
+                document.getElementById('map'), {
+                    center: center,
+                    zoom: 15
+                });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+
+
+
+            this.document.getElementById("buttoncheckgg").onclick = function () {
+                geocoder = new google.maps.Geocoder();
+
+                var address = document.getElementById("textboxgg").value;
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    map.setCenter(results[0].geometry.location);
+                    if (marker != null) {
+                        marker.setMap(null);
+                        marker = null;
+                    }
+                    marker = new google.maps.Marker({
+
+                        position: results[0].geometry.location,
+                        map: map,
+                        icon: "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-64.png"
+
+
+
+                    });
+
+                });
+            };
+            map.addListener('click', function (e) {
+                map.setCenter(e.latLng);
+                if (marker != null) {
+                    marker.setMap(null);
+                    marker = null;
+                }
+                marker = new google.maps.Marker({
+                    position: e.latLng,
+                    map: map,
+                    icon: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-64.png',
+                    title: e.latLng.toString()
+                });
+            });
+        }
+
+
+
+
+
+
+
+        monthDays = new Array(31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        monthnum = new Array("December", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+
+
+
+        date = new Date();
+        
+        month = date.getMonth() + 1;
+        year = date.getFullYear();
+        var firstday = date.getDay() - 1;
+        var day = 0;
+        var lastday = monthDays[date.getMonth()] - firstday + 1;
+        if (firstday >= 5) {
+            x = 6;
+        }
+        else {
+            x = 5;
+        }
+        table = document.querySelector("table");
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+
+        if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+            //閏年2/29
+            monthDays[2] = 29;
+        }
+        document.getElementById("demo").innerText = monthnum[date.getMonth() + 1] + date.getFullYear();
+
+
+        for (var i = 1; i <= x; i++) {
+
+            row = document.createElement("tr");
+            for (var j = 0; j <= 6; j++) {
+
+
+                cell = document.createElement("td");
+                cell.id = year + month + day;
+                
+                row.appendChild(cell);
+                
+                if (j < firstday && i == 1) {
+
+                    cell.innerHTML = '<font color="gray" >' + lastday + '</font>';
+
+                    lastday++;
+
+                    continue;
+                }
+                day++;
+
+                cell.innerText = day;
+                if (day < 20 && i >= 5) {
+                    cell.innerHTML = '<font color="gray">' + day + '</font>';
+                }
+
+                if (day == monthDays[date.getMonth() + 1]) {
+
+                    day = 0;
+
+
+                }
+                table.appendChild(row);
+
+            }
+        }
+
+        var tds = document.getElementsByTagName("td");
+        for (var i = 0; i <= tds.length - 1; i++) {
+            var tda = tds[i];
+
+
+            tda.onclick = function () {
+                btn = event.srcElement;
+
+                $('#modelId').modal('show');
+
+            }
+
+
+
+        }
+        $("div").bind("contextmenu", function () {
+            return false;
+        })
+        document.oncontextmenu = function () {
+            return false;
+        }
+        $("div").mousedown(function (e) {
+            console.log(e.which);
+            //右键为3
+            if (3 == e.which) {
+                $("p").remove();
+
+            }
+
+        })
+
+        
+        
+       
+        this.document.getElementById("save").onclick = function () {
+            var color = document.getElementById("colorchoose").value;
+
+            var inputtext1 = document.getElementById("textbox").value;
+
+            var inputaddress = document.getElementById("textboxgg").value;
+           var btntext = btn.innerHTML += '<br><p  style="background-color:' + color + ';">' + inputtext1 + "(" + inputaddress + ")" + '</p>';
+          scheduleItem = {
+                
+                month: month,
+                year: year, 
+                god3: btntext,
+                td: cell.id
+            };
+            console.log(scheduleItem);
+            var myJSON = JSON.stringify(scheduleItem);
+            window.localStorage["name"] =  myJSON;
+
+
+        }
+
+        this.document.getElementById("carouselId1").onclick = function () {
+
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
+            month--;
+
+            if (month < 1) {
+                month = 12;
+                year--;
+            }
+
+            var date = new Date(month + "/ 1 /" + year);
+            var firstday = date.getDay();
+
+            var day = 0;
+            var lastday = monthDays[month - 1] - firstday + 1;
+            if (firstday >= 5) {
+                x = 6;
+            }
+            else {
+                x = 5;
+            }
+            table = document.querySelector("table");
+            if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+                //閏年2/29
+                monthDays[2] = 29;
+            }
+
+
+            document.getElementById("demo").innerText = monthnum[month] + year;
+            for (var i = 1; i <= x; i++) {
+
+                var row = document.createElement("tr");
+                for (var j = 0; j <= 6; j++) {
+
+
+                    var cell = document.createElement("td");
+                    cell.id = year + month + day;
+                    row.appendChild(cell);
+                    if (j < firstday && i == 1) {
+
+                        cell.innerHTML = '<font color="gray">' + lastday + '</font>';
+                        lastday++;
+                        continue;
+                    }
+                    day++;
+                    cell.innerText = day;
+                    if (day < 20 && i >= 5) {
+                        cell.innerHTML = '<font color="gray">' + day + '</font>';
+                    }
+
+
+
+                    if (day == monthDays[month + 1]) {
+
+                        day = 0;
+
+
+                    }
+
+                    table.appendChild(row);
+                }
+            }
+
+
+        }
+        this.document.getElementById("carouselId2").onclick = function () {
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
+            month++;
+            if (month > 12) {
+                month = 1;
+                year++;
+            }
+            var date = new Date(month + "/ 1 /" + year);
+
+            var firstday = date.getDay();
+            var day = 0;
+            var lastday = monthDays[month - 1] - firstday + 1;
+            if (firstday >= 5) {
+                x = 6;
+            }
+            else {
+                x = 5;
+            }
+            table = document.querySelector("table");
+            if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+                //閏年2/29
+                monthDays[2] = 29;
+            }
+
+
+            document.getElementById("demo").innerText = monthnum[month] + year;
+            for (var i = 1; i <= x; i++) {
+
+                var row = document.createElement("tr");
+                for (var j = 0; j <= 6; j++) {
+
+
+                    var cell = document.createElement("td");
+                    cell.id = year + month + day;
+                    row.appendChild(cell);
+                    if (j < firstday && i == 1) {
+
+                        cell.innerHTML = '<font color="gray ">' + lastday + '</font>';
+                        lastday++;
+                        continue;
+                    }
+                    day++;
+
+                    cell.innerText = day;
+                    if (day < 20 && i >= 5) {
+                        cell.innerHTML = '<font color="gray" ><' + day + '</font>';
+                    }
+                    if (day == monthDays[month]) {
+
+                        day = 0;
+
+
+                    }
+                    table.appendChild(row);
+                }
+            }
+
+
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

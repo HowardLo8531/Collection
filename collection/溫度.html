@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="card mt-5 border-info" style="width: 100%;">
+
+        <div class="container">
+
+            <div class="row mt-5">
+
+                <div class="col-4">
+                    <div class="card border-info" style="width: 18rem;">
+
+                        <div class="card-header border-info">設定</div>
+                        <div class="card-body">
+                            <h5 class="card-title border-info">選擇轉換溫度</h5>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="unit" id="unitCF"> 攝氏轉華氏
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="unit" id="unitFC"> 華氏轉攝氏
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 text-center">
+
+                    <p>
+                        <button type="button" value="7" id="b7" class="btn btn-info mr-3 btn-lg">7</button>
+                        <button type="button" value="8" id="b8" class="btn btn-info mr-3 btn-lg">8</button>
+                        <button type="button" value="9" id="b9" class="btn btn-info mr-3 btn-lg">9</button>
+                    </p>
+                    <p>
+                        <button type="button" value="4" id="b4" class="btn btn-info mr-3 btn-lg">4</button>
+                        <button type="button" value="5" id="b5" class="btn btn-info mr-3 btn-lg">5</button>
+                        <button type="button" value="6" id="b6" class="btn btn-info mr-3 btn-lg">6</button>
+                    </p>
+                    <p>
+                        <button type="button" value="1" id="b1" class="btn btn-info mr-3 btn-lg">1</button>
+                        <button type="button" value="2" id="b2" class="btn btn-info mr-3 btn-lg">2</button>
+                        <button type="button" value="3" id="b3" class="btn btn-info mr-3 btn-lg">3</button>
+                    </p>
+                    <p>
+                        <button type="button" value="0" id="b0" class="btn btn-info mr-3 btn-lg">0</button>
+                        <button type="button" value="." id="b" class="btn btn-info mr-3 btn-lg">.</button>
+                    </p>
+
+                </div>
+                <div class="col-4  ">
+                    <div class="input-group mb-2 ">
+                        <div class="input-group-prepend ">
+                            <div class="input-group-text">Input</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="">
+                    </div>
+                    <button type="button" id="starttt" class="btn btn-info mt-3 mr-3 btn-lg">轉換</button>
+                    <button type="button" id="clear" class="btn btn-info mt-3 btn-lg">清除</button>
+                    <input type="text" id="outputF" readonly class="form-control" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+
+        var buttons = document.getElementsByTagName("button");
+
+        for (var i = 0; i <= buttons.length - 1; i++) {
+            var button = buttons[i];
+            button.onclick = function () {
+                var btn = event.srcElement;
+                document.getElementById("inlineFormInputGroup").value += btn.innerText;
+            }
+        }
+
+
+
+        document.getElementById("starttt").onclick = function () {
+            var btn = event.srcElement;
+                var tempC = document.getElementById("inlineFormInputGroup").value;
+            if (document.getElementById("unitCF").checked ) {
+                
+                var tempF = (tempC * 1.8) + 32;
+                document.getElementById("outputF").value = tempF;
+            }
+            if (document.getElementById("unitFC").checked) {
+           
+                var tempF = tempC - (32 * 5 / 9);
+                document.getElementById("outputF").value = tempF;
+            }
+        };
+
+
+        document.getElementById("clear").onclick = function () {
+            var btn = event.srcElement;
+            document.getElementById('inlineFormInputGroup').value = '';
+            document.getElementById('outputF').value = '';
+        }
+    </script>
+</body>
+
+</html>

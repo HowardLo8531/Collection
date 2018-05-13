@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outFile": "./jstest2/jstest2/jstest2.js"
+    },
+    "files": [
+        "jstest2.ts"
+    ]
+}

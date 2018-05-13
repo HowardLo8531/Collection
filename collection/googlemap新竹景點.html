@@ -1,0 +1,383 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-6">
+            <div id="map" style="width:700px; height:700px "></div>
+        </div>
+
+        <div>
+            <span id="Car"></span>
+            <span id="Taxi"></span>
+            <span id="Transit2"></span>
+        </div>
+
+    </div>
+    <div id="direction" class="directionstyle"></div>
+
+
+    <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet" />
+
+
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6EH3jueR1kURn1OK7t5tRHnhN2JsOrjw&callback=initMap"
+        type="text/javascript"></script>
+
+    <script>
+        var map;
+        var marker = null;
+        var marker1 = null;
+        var marker2 = null;
+        var point1 = null, point2 = null, point3 = null;;
+        var center = { lat: 24.7571075, lng: 120.952429 };
+        var directionsService = null;
+        var directionsDisplay = null;
+        var start;
+        var end;
+
+        var request1 = new XMLHttpRequest();
+        var request2 = new XMLHttpRequest();
+        var request3 = new XMLHttpRequest();
+        var geocoder;
+        var geocoder1;
+
+        window.onload = function () {
+            map = new google.maps.Map(
+                document.getElementById('map'), {
+                    center: center,
+                    zoom: 15
+                });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('direction'));
+
+
+
+            map.addListener("click", function (e) {
+
+                if (point1 != null && point2 != null) {
+                    point1 = null;
+                    point2 = null;
+                }
+
+                if (point1 == null) {
+                    point1 = e.latLng.lat() + ',' + e.latLng.lng();
+                    return;
+                }
+                if (point2 == null) {
+                    point2 = e.latLng.lat() + ',' + e.latLng.lng();
+                }
+                map.setCenter(e.latLng);
+                if (marker != null) {
+                    marker.setMap(null);
+                    marker = null;
+                }
+                console.log(point1);
+                console.log(point2);
+
+                if (point1 != null && point2 != null) {
+
+                    $(function () {
+                        Distance();
+
+                    });
+
+                    function Distance() {
+                        start = point1;
+                        end = point2;
+
+                        var request = {
+                            origin: start,
+                            destination: end,
+                            waypoints: point3,
+                            optimizeWaypoints: true,
+                            travelMode: google.maps.DirectionsTravelMode.DRIVING,
+
+                        };
+                        var request1 = {
+                            origin: start,
+                            destination: end,
+
+                            travelMode: 'TRANSIT'
+
+                        };
+
+                        directionsService.route(request, function (response, status) {
+                            var strTmp = "";
+                            console.log(response);
+                            if (status == google.maps.DirectionsStatus.OK) {
+                                directionsDisplay.setDirections(response);
+
+                                var route = response.routes[0];
+                                for (var i = 0; i < route.legs.length; i++) {
+                                    var routeSegment = i + 1;
+                                    strTmp += route.legs[i].distance.text;
+                                }
+
+                                //取得距離(正整數，公尺)
+                                var dist = parseFloat(strTmp).toString();
+                                console.log(dist + "km");
+                                for (var i = 0; i <= response.routes[0].legs[0].steps.length - 1; i++) {
+                                    if (response.routes[0].legs[0].steps[i].instructions.indexOf("收費路段")) {
+                                        console.log("有上高速公路");
+                                        var car = document.getElementById("Car");
+                                        car.innerHTML = "自行開車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                            "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                            response.routes[0].legs[0].steps.length + "總金額" + (response.routes[0].legs[0].distance.value / 1000 * (5 + 1.2)).toFixed(2) + "元 有上高速公路<br/>";
+                                        console.log("自行開車" + dist * (5 + 1.2) + "元");
+                                        if (dist <= 1.5) {
+                                            var taxi = document.getElementById("Taxi");
+                                            car.innerHTML = "計程車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                                "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                                response.routes[0].legs[0].steps.length + "總金額" + 85 + "元 有上高速公路<br/>";
+                                            console.log("計程車" + 85 + "元 ");
+                                        }
+                                        else if (dist > 1.5) {
+                                            var taxi = document.getElementById("Taxi");
+                                            car.innerHTML = "計程車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                                "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                                response.routes[0].legs[0].steps.length + "總金額" + (((response.routes[0].legs[0].duration.value / 1000 - 1.5) * 20) +
+                                                    (1.2 * response.routes[0].legs[0].duration.value / 1000) + 85).toFixed(2) + "元 有上高速公路<br/>";
+                                            console.log("計程車" + ((dist - 1.5) * 20) + (1.2 * dist) + 85 + "元 ");
+                                        }
+                                        break;
+                                    }
+                                    else {
+                                        console.log("沒上高速公路");
+                                        console.log("自行開車" + dist * 5 + "元");
+                                        var car = document.getElementById("Car");
+                                        car.innerHTML = "自行開車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                            "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                            response.routes[0].legs[0].steps.length + "總金額" + (response.routes[0].legs[0].distance.value / 1000 * (5 + 1.2)).toFixed(2) + "元 <br/>";
+                                        if (response.routes[0].legs[0].distance.value <= 1.5) {
+                                            var taxi = document.getElementById("Taxi");
+                                            taxi.innerHTML = "計程車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                                "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                                response.routes[0].legs[0].steps.length + "總金額" + 85 + "元 <br/>";
+                                            console.log("計程車" + 85 + "元");
+                                        }
+                                        else if (response.routes[0].legs[0].distance.value > 1.5) {
+                                            var taxi = document.getElementById("Taxi");
+                                            taxi.innerHTML = "計程車:總公里數：" + response.routes[0].legs[0].distance.text +
+                                                "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                                response.routes[0].legs[0].steps.length + "總金額" + (((response.routes[0].legs[0].duration.value / 1000 - 1.5) * 20) + 85).toFixed(2) + "元 <br/>";
+                                            console.log("計程車" + ((dist - 1.5) * 20) + 85 + "元");
+                                        }
+                                        break;
+                                    }
+
+
+
+                                }
+
+
+
+
+                            }
+                        });
+
+                        directionsService.route(request1, function (response, status) {
+
+                            if (status == google.maps.DirectionsStatus.OK) {
+                                directionsDisplay.setDirections(response);
+                                var route = response.routes[0];
+                                var tran = document.getElementById("Transit2");
+                                tran.innerHTML = "大眾運輸:總公里數：" + response.routes[0].legs[0].distance.text +
+                                    "﹍總時間： " + response.routes[0].legs[0].duration.text + "﹍街道數：" +
+                                    response.routes[0].legs[0].steps.length + "總金額" + (response.routes[0].fare.value).toFixed(2) + "元<br/>";
+                                console.log("大眾運輸" + (route.fare.value).toFixed(2) + "元");
+                            }
+                        });
+
+                    }
+                }
+
+            });
+            request1.open("GET", "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json");
+            request1.onload = function () {
+
+                var items = JSON.parse(this.responseText);
+                var itemSum = items.length;
+
+                for (var i = 0; i < itemSum; i++) {
+                    marker = new google.maps.Marker({
+
+                        position: { lat: parseFloat(items[i].緯度), lng: parseFloat(items[i].經度) },
+                        map: map,
+                        icon: "https://png.icons8.com/ios/50/000000/5-star-hotel.png",
+                        title: items[i].旅館名稱
+
+                    });
+
+                    marker.addListener("click", function (e) {
+                        point3 = [{ lat: parseFloat(items[i].緯度), lng: parseFloat(items[i].經度) }];
+                        console.log(point3);
+
+
+
+                    });
+
+                }
+
+
+            }
+            request1.send();
+
+
+            geocoder = new google.maps.Geocoder();
+            request2.open("GET", "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json");
+
+            request2.onload = function () {
+
+                var items = JSON.parse(this.responseText);
+
+
+                items.forEach(item => {
+                    var address = item["地址"];
+                    var name = item["景點名稱"];
+                    console.log(address);
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+                        map.setCenter(results[0].geometry.location);
+                        if (status == google.maps.GeocoderStatus.OK) {
+                        marker1 = new google.maps.Marker({
+
+                            position: results[0].geometry.location,
+                            map: map,
+                            icon: "https://png.icons8.com/color/50/000000/statue-of-christ-the-redeemer.png",
+                            title: name
+                        });
+                        }
+                        marker1.addListener("click", function (e) {
+                            point3 = [{ location: item["景點名稱"], stopover: false }];
+                            console.log(point3);
+
+
+
+                        });
+
+                    });
+
+
+
+                });
+
+            }
+            request2.send();
+
+/*
+            $(function () {
+                $.ajax({
+                    url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
+                    type: "GET"
+                }).done(function (data) {
+                    for (var item of data) {
+                        var address = item["地址"];
+
+
+                        $.ajax({
+                            url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=[AIzaSyB6EH3jueR1kURn1OK7t5tRHnhN2JsOrjw]',
+                            type: 'GET',
+                            async: false
+                        }).done(function (data) {
+
+
+                            if (status == google.maps.GeocoderStatus.OK) {
+
+                                map.setCenter(data.results[0].geometry.location);
+                                marker2 = new google.maps.Marker({
+                                    position: data.results[0].geometry.location,
+                                    map: map,
+                                    icon: "https://png.icons8.com/doodle/50/000000/food.png",
+                                    title: name
+                                });
+
+                            }
+                            else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                                setTimeout(function () {
+                                    //Recursively calling spotPosition method for lost addresses
+                               
+                                }, 1000);
+                            }
+
+
+                        });
+                    }
+                });
+
+            */
+
+
+
+
+
+            /* request3.open("GET", "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json");
+             request3.onload = function () {
+ 
+                 var items = JSON.parse(this.responseText);
+ 
+ 
+ 
+ 
+ 
+ 
+                 items.forEach(item => {
+                     var address = item["地址"];
+                     var name = item["店家名稱"];
+ 
+ 
+ 
+ 
+                     var geoFood = function () {
+                         geocoder.geocode({ 'address': address }, function (results, status) {
+ 
+                             if (status == google.maps.GeocoderStatus.OK) {
+ 
+                                 map.setCenter(results[0].geometry.location);
+                                 marker2 = new google.maps.Marker({
+                                     position: results[0].geometry.location,
+                                     map: map,
+                                     icon: "https://png.icons8.com/doodle/50/000000/food.png",
+                                     title: name
+                                 });
+ 
+                             }
+                             else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                                 setTimeout(function () {
+                                     //Recursively calling spotPosition method for lost addresses
+                                     geoFood();
+                                 }, 1000);
+                             }
+ 
+                         });
+ 
+                     }
+                     geoFood();
+                     marker.addListener("click", function (e) {
+                         point3 = e.latLng.lat() + ',' + e.latLng.lng();
+                         console.log(point3);
+                     });
+ 
+ 
+ 
+                 });
+ 
+             }
+ 
+ 
+             request3.send();*/
+
+
+
+        }
+
+    </script>
+</body>
+
+</html>

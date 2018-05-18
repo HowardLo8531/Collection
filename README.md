@@ -1,2 +1,2 @@
-# Collection
+# MyFristProject
 Test

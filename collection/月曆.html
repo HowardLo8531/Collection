@@ -447,6 +447,36 @@
                 }
             }
 
+ var tds = document.getElementsByTagName("td");
+        for (var i = 0; i <= tds.length - 1; i++) {
+            var tda = tds[i];
+
+
+            tda.onclick = function () {
+                btn = event.srcElement;
+
+                $('#modelId').modal('show');
+
+            }
+
+
+
+        }
+        $("div").bind("contextmenu", function () {
+            return false;
+        })
+        document.oncontextmenu = function () {
+            return false;
+        }
+        $("div").mousedown(function (e) {
+            console.log(e.which);
+            //右键为3
+            if (3 == e.which) {
+                $("p").remove();
+
+            }
+
+        })
 
         }
         this.document.getElementById("carouselId2").onclick = function () {
@@ -508,6 +538,36 @@
                 }
             }
 
+ var tds = document.getElementsByTagName("td");
+        for (var i = 0; i <= tds.length - 1; i++) {
+            var tda = tds[i];
+
+
+            tda.onclick = function () {
+                btn = event.srcElement;
+
+                $('#modelId').modal('show');
+
+            }
+
+
+
+        }
+        $("div").bind("contextmenu", function () {
+            return false;
+        })
+        document.oncontextmenu = function () {
+            return false;
+        }
+        $("div").mousedown(function (e) {
+            console.log(e.which);
+            //右键为3
+            if (3 == e.which) {
+                $("p").remove();
+
+            }
+
+        })
 
 
 

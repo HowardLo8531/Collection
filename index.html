@@ -18,10 +18,13 @@
   h6 {
     font-family: "Raleway", sans-serif
   }
-  .w3-hover-opacity{
-    -webkit-transition: transform 1s; /* For Safari 3.1 to 6.0 */
-    transition: transform 1s;
+
+  .w3-hover-opacity {
+    -webkit-transition: transform 0.5s;
+    /* For Safari 3.1 to 6.0 */
+    transition: transform 0.5s;
   }
+
   .w3-hover-opacity:hover {
     transform: scale(1.4);
     z-index: 3;
@@ -29,7 +32,7 @@
     margin: auto;
     box-shadow: 0 0 30px;
     opacity: 1.0;
-   
+
   }
 
   body {
@@ -57,57 +60,58 @@
     padding: 10px 20px;
     font-size: 1em;
     color: white;
-    
+
   }
-  
-  .w3-button{
-  display: inline-block;
-  border-radius: 4px;
-  
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 10px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: pointer;
-  
-  border-radius: 15px 50px 30px;
-}
 
-.w3-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+  .w3-button {
+    display: inline-block;
+    border-radius: 4px;
 
-.w3-button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
 
-.w3-button:hover span {
-  padding-right: 25px;
-}
+    border-radius: 15px 50px 30px;
+  }
 
-.w3-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-#borderimg { 
-  
+  .w3-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .w3-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .w3-button:hover span {
+    padding-right: 25px;
+  }
+
+  .w3-button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  #borderimg {
+
     border-radius: 50%;
- 
-}
-.form-control{
-  border-radius: 15px 50px 30px;
-}
 
+  }
+
+  .form-control {
+    border-radius: 15px 50px 30px;
+  }
 </style>
 
 
@@ -122,7 +126,9 @@
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
-      <img src="collection/Images/1312290851362378-450x558.jpg" style="width:100%;" class="w3-round" id="borderimg">
+
+      <img src="collection/Images/1312290851362378-450x558.jpg" onmouseover="rotateYDIV()" style="width:100%;"
+        class="w3-round" id="borderimg">
       <br>
       <br>
       <h4>
@@ -140,16 +146,16 @@
     </div>
 
     <div class="w3-panel w3-large">
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
+      <i class="fa fa-facebook-official w3-hover-opacity">&nbsp</i>
+      <i class="fa fa-instagram w3-hover-opacity">&nbsp</i>
+      <i class="fa fa-snapchat w3-hover-opacity">&nbsp</i>
+      <i class="fa fa-pinterest-p w3-hover-opacity">&nbsp</i>
+      <i class="fa fa-twitter w3-hover-opacity">&nbsp</i>
+      <i class="fa fa-linkedin w3-hover-opacity">&nbsp</i>
     </div>
-   
+
   </nav>
-  
+
 
 
   <!-- Overlay effect when opening sidebar on small screens -->
@@ -416,7 +422,45 @@
     setInterval(updateGradient, 10);
 
 
+  </script>
+  <script>
 
+
+var x,y,n=0,ny=0,rotINT,rotYINT
+
+function rotateYDIV()
+{
+y=document.getElementById("borderimg")
+clearInterval(rotYINT)
+rotYINT=setInterval("startYRotate()",10)
+}
+function startRotate()
+{
+n=n+1
+x.style.transform="rotate(" + n + "deg)"
+x.style.webkitTransform="rotate(" + n + "deg)"
+x.style.OTransform="rotate(" + n + "deg)"
+x.style.MozTransform="rotate(" + n + "deg)"
+if (n==180 || n==360)
+{
+clearInterval(rotINT)
+if (n==360){n=0}
+}
+}
+function startYRotate()
+{
+ny=ny+1
+y.style.transform="rotateY(" + ny + "deg)"
+y.style.webkitTransform="rotateY(" + ny + "deg)"
+y.style.OTransform="rotateY(" + ny + "deg)"
+y.style.MozTransform="rotateY(" + ny + "deg)"
+if (ny==180 || ny>=360)
+{
+clearInterval(rotYINT)
+if (ny>=360){ny=0}
+}
+}
+//-->
 
   </script>
 

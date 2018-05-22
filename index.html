@@ -18,14 +18,18 @@
   h6 {
     font-family: "Raleway", sans-serif
   }
-
+  .w3-hover-opacity{
+    -webkit-transition: transform 1s; /* For Safari 3.1 to 6.0 */
+    transition: transform 1s;
+  }
   .w3-hover-opacity:hover {
-    transform: scale(1.5);
+    transform: scale(1.4);
     z-index: 3;
     position: relative;
     margin: auto;
     box-shadow: 0 0 30px;
     opacity: 1.0;
+   
   }
 
   body {
@@ -44,35 +48,84 @@
   #mySidebar {
     opacity: 0.9;
   }
-  .back-top { 
+
+  .back-top {
     position: fixed;
-     bottom: 50px;
-      right: 0; background:black;
-       padding: 10px 20px;
-        font-size: 1em;
-         color:white; 
+    bottom: 50px;
+    right: 0;
+    background: black;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    
   }
+  
+  .w3-button{
+  display: inline-block;
+  border-radius: 4px;
+  
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  
+  border-radius: 15px 50px 30px;
+}
+
+.w3-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.w3-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.w3-button:hover span {
+  padding-right: 25px;
+}
+
+.w3-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#borderimg { 
+  
+    border-radius: 50%;
+ 
+}
+
 </style>
 
 
 
-<body class="w3-light-grey w3-content" style="max-width:100%">
+<body class="w3-light-grey w3-content" style="max-width:100%" id="gradient">
 
   <!-- Sidebar/menu -->
-  <div id="gradient" />
+
   <nav class="w3-sidebar w3-collapse w3-black w3-animate-left" style="z-index:3;width:250px;" id="mySidebar">
     <br>
     <div class="w3-container">
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
-      <img src="collection/Images/1312290851362378-450x558.jpg" style="width:45%;" class="w3-round">
+      <img src="collection/Images/1312290851362378-450x558.jpg" style="width:100%;" class="w3-round" id="borderimg">
       <br>
       <br>
       <h4>
         <b>asdfasdfasdfasdffff</b>
       </h4>
-      <p class="w3-text-grey">Template by W3.CSS</p>
+      <p class="w3-text-purple">Template by W3.CSS</p>
     </div>
     <div class="w3-bar-block">
       <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal">
@@ -91,8 +144,9 @@
       <i class="fa fa-twitter w3-hover-opacity"></i>
       <i class="fa fa-linkedin w3-hover-opacity"></i>
     </div>
+   
   </nav>
-
+  
 
 
   <!-- Overlay effect when opening sidebar on small screens -->
@@ -285,7 +339,7 @@
       <!-- End page content -->
     </div>
   </div>
-  <a href="#" class="back-top">  TOP </a>
+  <a href="#" class="back-top"> TOP </a>
   <script>
     // Script to open and close sidebar
     function w3_open() {
@@ -357,6 +411,7 @@
     }
 
     setInterval(updateGradient, 10);
+
 
 
 

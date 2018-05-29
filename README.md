@@ -16,7 +16,6 @@ Url: https://changhaolo.azurewebsites.net
     ![cul](collection/Images/col.png)
     * [轉換溫度](https://changhaolo.azurewebsites.net/collection/%E6%BA%AB%E5%BA%A6.html)
       ![hot](collection/Images/hotcoldchange.png)
-* 網頁互動
     * [猜數字](https://changhaolo.azurewebsites.net/collection/%E7%8C%9C%E6%95%B8%E5%AD%97.html)
     ![guessnumber](collection/Images/hotcoldchange1.png)
     * [網頁草稿](https://changhaolo.azurewebsites.net/collection/%E7%B6%B2%E9%A0%81%E8%8D%89%E7%A8%BF.html)

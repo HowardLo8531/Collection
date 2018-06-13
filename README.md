@@ -30,8 +30,8 @@ Url: https://changhaolo.azurewebsites.net
      ![sharp](collection/Images/news.png)
     * [加減乘除](https://changhaolo.azurewebsites.net/collection/%E5%8A%A0%E6%B8%9B%E4%B9%98%E9%99%A4/jstest.html)
       ![abcd](collection/Images/abcd.png)
-       * [貓新聞](https://changhaolo.azurewebsites.net/collection/%E5%8A%A0%E6%B8%9B%E4%B9%98%E9%99%A4/jstest.html)
-      ![abcd](collection/Images/cartnew.png)
+       * [貓新聞]https://changhaolo.azurewebsites.net/collection/cat-slave/index.html)
+      ![catnews](collection/Images/cartnew.png)
 ## Using technology
 Html、CSS、BootStrap、JavaScript、JQuery
 ## Contacts
